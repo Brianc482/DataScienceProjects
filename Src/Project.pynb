@@ -1,0 +1,133 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                    Company            Age  Share of respondents  Year Country\n",
+      "6                    Arby's    18-29 years                 65.98  2017      US\n",
+      "57                   Arby's    18-29 years                 34.50  2018      US\n",
+      "7                    Arby's    30-49 years                 68.90  2017      US\n",
+      "58                   Arby's    30-49 years                 47.62  2018      US\n",
+      "8                    Arby's    50-64 years                 71.92  2017      US\n",
+      "59                   Arby's    50-64 years                 38.46  2018      US\n",
+      "0               Burger King  18 - 29 years                 78.34  2017      US\n",
+      "51              Burger King  18 - 29 years                 53.53  2018      US\n",
+      "1               Burger King  30 - 49 years                 82.89  2017      US\n",
+      "52              Burger King  30 - 49 years                 63.95  2018      US\n",
+      "2               Burger King  50 - 64 years                 85.43  2017      US\n",
+      "53              Burger King  50 - 64 years                 51.24  2018      US\n",
+      "24              Chick-fil-A  18 - 29 years                 74.32  2017      US\n",
+      "75              Chick-fil-A  18 - 29 years                 67.54  2018      US\n",
+      "25              Chick-fil-A  30 - 49 years                 69.45  2017      US\n",
+      "76              Chick-fil-A  30 - 49 years                 23.98  2018      US\n",
+      "26              Chick-fil-A  50 - 64 years                 71.26  2017      US\n",
+      "77              Chick-fil-A  50 - 64 years                 55.76  2018      US\n",
+      "33   Chipotle Mexican Grill  18 - 29 years                 51.76  2017      US\n",
+      "84   Chipotle Mexican Grill  18 - 29 years                 47.90  2018      US\n",
+      "34   Chipotle Mexican Grill  30 - 49 years                 56.73  2017      US\n",
+      "85   Chipotle Mexican Grill  30 - 49 years                 66.83  2018      US\n",
+      "35   Chipotle Mexican Grill  50 - 64 years                 59.29  2017      US\n",
+      "86   Chipotle Mexican Grill  50 - 64 years                 52.11  2018      US\n",
+      "36                 Domino's  18 - 29 years                 93.65  2017      US\n",
+      "87                 Domino's  18 - 29 years                 91.87  2018      US\n",
+      "37                 Domino's  30 - 49 years                 96.11  2017      US\n",
+      "88                 Domino's  30 - 49 years                 85.63  2018      US\n",
+      "38                 Domino's  50 - 64 years                 97.39  2017      US\n",
+      "89                 Domino's  50 - 64 years                 93.90  2018      US\n",
+      "3            Dunkin' Donuts    18-29 years                 57.73  2017      US\n",
+      "54           Dunkin' Donuts    18-29 years                 35.87  2018      US\n",
+      "4            Dunkin' Donuts    30-49 years                 49.72  2017      US\n",
+      "55           Dunkin' Donuts    30-49 years                 40.81  2018      US\n",
+      "5            Dunkin' Donuts    50-64 years                 46.29  2017      US\n",
+      "56           Dunkin' Donuts    50-64 years                 24.09  2018      US\n",
+      "48          Jack in the Box  18 - 29 years                 50.29  2017      US\n",
+      "99          Jack in the Box  18 - 29 years                 53.12  2018      US\n",
+      "49          Jack in the Box  30 - 49 years                 53.32  2017      US\n",
+      "100         Jack in the Box  30 - 49 years                 59.63  2018      US\n",
+      "50          Jack in the Box  50 - 64 years                 62.12  2017      US\n",
+      "101         Jack in the Box  50 - 64 years                 65.90  2018      US\n",
+      "9                       KFC  18 - 29 years                 82.11  2017      US\n",
+      "60                      KFC  18 - 29 years                 44.07  2018      US\n",
+      "10                      KFC  30 - 49 years                 86.47  2017      US\n",
+      "61                      KFC  30 - 49 years                 56.35  2018      US\n",
+      "11                      KFC  50 - 64 years                 90.37  2017      US\n",
+      "62                      KFC  50 - 64 years                 42.56  2018      US\n",
+      "42           Little Caesars  18 - 29 years                 40.34  2017      US\n",
+      "93           Little Caesars  18 - 29 years                 38.80  2018      US\n",
+      "43           Little Caesars  30 - 49 years                 42.18  2017      US\n",
+      "94           Little Caesars  30 - 49 years                 47.87  2018      US\n",
+      "44           Little Caesars  50 - 64 years                 45.87  2017      US\n",
+      "95           Little Caesars  50 - 64 years                 52.90  2018      US\n",
+      "12               McDonald's  18 - 29 years                 82.12  2017      US\n",
+      "63               McDonald's  18 - 29 years                 68.07  2018      US\n",
+      "13               McDonald's  30 - 49 years                 89.99  2017      US\n",
+      "64               McDonald's  30 - 49 years                 73.42  2018      US\n",
+      "14               McDonald's  50 - 64 years                 91.08  2017      US\n",
+      "65               McDonald's  50 - 64 years                 65.14  2018      US\n",
+      "(102, 5)\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "mydata1 = pd.read_excel(\"C:\\\\Users\\Brian\\Desktop\\EECS_731\\Project1\\Data\\People-who-visit-restaurants-in-the-us-2017-by-age.xlsx\")\n",
+    "mydata2 = pd.read_excel(\"C:\\\\Users\\Brian\\Desktop\\EECS_731\\Project1\\Data\\People-who-visit-restaurants-in-the-us-2018-by-age.xlsx\")\n",
+    "\n",
+    "\n",
+    "grouped = pd.merge(mydata1, mydata2, how = \"outer\")\n",
+    "grouped = grouped.sort_values([\"Company\",\"Age\"])\n",
+    "\n",
+    "print(grouped.head(60))\n",
+    "print(grouped.shape)\n",
+    "\n",
+    "#Uncomment to create an Excel spreadsheet of the total data set\n",
+    "#grouped.to_excel(\"C:\\\\Users\\Brian\\Desktop\\EECS_731\\Project1\\Data\\SingleSet.xlsx\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
